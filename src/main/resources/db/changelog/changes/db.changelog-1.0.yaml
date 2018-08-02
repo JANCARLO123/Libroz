@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: jan_carlo
+      changes:
+        - createTable:
+            tableName: libro
+            schemaName: public
+            columns:
+              - column:
+                   name: id
+                   type: int
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+              - column:
+                  name: nombre
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: autor
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: paginas
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: editorial
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: img
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: activo
+                  type: boolean
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false

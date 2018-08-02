@@ -1,0 +1,52 @@
+databaseChangeLog:
+    - changeSet:
+        id: 2
+        author: jan_carlo
+        changes:
+          - insert:
+              tableName: libro
+              schemaName: public
+              columns:
+                - column:
+                    name: nombre
+                    value: Libro 1
+                - column:
+                    name: autor
+                    value: Autor 1
+                - column:
+                    name: paginas
+                    value: 100
+                    type: int
+                - column:
+                    name: editorial
+                    value: Editorial
+                - column:
+                    name: img
+                    value: img
+                - column:
+                    name: activo
+                    value: true
+                    type: boolean
+          - insert:
+              tableName: libro
+              columns:
+                - column:
+                    name: nombre
+                    value: Libro 2
+                - column:
+                    name: autor
+                    value: Autor 2
+                - column:
+                    name: paginas
+                    value: 1001
+                    type: int
+                - column:
+                    name: editorial
+                    value: Editorial 2
+                - column:
+                    name: img
+                    value: img
+                - column:
+                    name: activo
+                    value: true
+                    type: boolean
