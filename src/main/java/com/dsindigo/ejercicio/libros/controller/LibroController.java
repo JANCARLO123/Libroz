@@ -12,41 +12,48 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
+
 public class LibroController {
 
     @Autowired
     private LibroRepository libroRepository;
 
     @GetMapping("/libros")
-    public Collection<Libro> coolCars() {
+    @CrossOrigin(origins = "*")
+    public List<Libro> getLibros() {
         return libroRepository.findAll();
     }
 
-    @GetMapping("/libro/{id}")
-    ResponseEntity<?> getLibro(@PathVariable Long id) {
-        Optional<Libro> group = libroRepository.findById(id);
-        return group.map(response -> ResponseEntity.ok().body(response))
+    @GetMapping("/libros/{id}")
+    @CrossOrigin(origins = "*")
+    ResponseEntity<Libro> getLibro(@PathVariable Long id) {
+        Optional<Libro> libro = libroRepository.findById(id);
+        return libro.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/libro")
-    ResponseEntity<Libro> createLibro(@Valid @RequestBody Libro libro) throws URISyntaxException {
-        Libro result = libroRepository.save(libro);
-        return ResponseEntity.created(new URI("/libro/" + result.getId()))
-                .body(result);
-    }
-
-    @PutMapping("/libro/{id}")
-    ResponseEntity<Libro> updateLibro(@Valid @RequestBody Libro libro) {
+    @PostMapping("/libros")
+    @CrossOrigin(origins = "*")
+    ResponseEntity<?> createLibro(@Valid @RequestBody Libro libro) throws URISyntaxException {
         Libro result = libroRepository.save(libro);
         return ResponseEntity.ok().body(result);
     }
 
-    @DeleteMapping("/libro/{id}")
-    public ResponseEntity<?> deleteLibro(@PathVariable Long id) {
+    @PutMapping("/libros/{id}")
+    @CrossOrigin(origins = "*")
+    ResponseEntity<?> updateLibro(@PathVariable Long id, @Valid @RequestBody Libro libro) {
+
+        Libro result = libroRepository.save(libro);
+        return ResponseEntity.ok().body(result);
+    }
+
+    @DeleteMapping("/libros/{id}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<Libro> deleteLibro(@PathVariable Long id) {
         libroRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
