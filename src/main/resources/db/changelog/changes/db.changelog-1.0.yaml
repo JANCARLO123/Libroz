@@ -4,6 +4,122 @@ databaseChangeLog:
       author: jan_carlo
       changes:
         - createTable:
+            tableName: user
+            schemaName: public
+            columns:
+              - column:
+                   name: id
+                   type: int
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: jan_carlo
+      changes:
+        - createTable:
+            tableName: role
+            schemaName: public
+            columns:
+              - column:
+                   name: id
+                   type: int
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: jan_carlo
+      changes:
+        - createTable:
+            tableName: user_role
+            schemaName: public
+            columns:
+              - column:
+                   name: user_id
+                   type: int
+                   constraints:
+                     foreignKeyName: fk_user_id
+                     nullable: false
+                     references: user(id)
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_role_id
+                    nullable: false
+                    references: role(id)
+
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: jan_carlo
+      changes:
+        - createTable:
+            tableName: persona
+            schemaName: public
+            columns:
+              - column:
+                   name: id
+                   type: int
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: adress
+                  type: varchar(300)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update
+                  type: date
+                  constraints:
+                    nullable: false
+
+
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: jan_carlo
+      changes:
+        - createTable:
             tableName: libro
             schemaName: public
             columns:
